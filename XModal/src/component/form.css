@@ -1,32 +1,6 @@
-/* form div {
+form div {
   display: flex;
   flex-direction: column;
-}
-
-.modal-content {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-
-
-.modalForm {
-  background-color: white;
-  height: 465px;
-  width: 500px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
 }
 
 form {
@@ -39,9 +13,8 @@ form {
   height: 465px;
   width: 500px;
   border-radius: 10px;
-  
+
   justify-content: flex-start;
-  
 }
 
 input {
@@ -51,8 +24,7 @@ input {
 
 label {
   font-weight: 500;
-} */
-
+}
 
 /* BACKDROP / OVERLAY */
 .modal {
