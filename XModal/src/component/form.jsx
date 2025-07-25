@@ -1,195 +1,3 @@
-// import React, { useEffect, useRef, useState } from "react";
-// import "./form.css";
-
-// export default function Form() {
-//   let [showModal, setShowModal] = useState(false);
-//   let [inputData, setInputData] = useState({
-//     username: "",
-//     email: "",
-//     phoneNumber: "",
-//     dob: "",
-//   });
-
-//   let modalRef = useRef();
-
-//   function validation() {
-//     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     if (!emailRegex.test(inputData.email)) {
-//       alert("Invalid email. Please check your email address.");
-//       return;
-//     }
-
-//     if (inputData.phoneNumber.length !== 10 || isNaN(inputData.phoneNumber)) {
-//       alert("Invalid phone number. Please enter a 10-digit phone number.");
-//       return;
-//     }
-
-//     if (!inputData.dob || new Date(inputData.dob) > new Date()) {
-//       alert("Invalid date of birth. Please enter a valid past date.");
-//       return;
-//     }
-
-//     return true;
-//   }
-
-//   useEffect(() => {
-
-//     let handleClickOutside = (e) => {
-
-//       if(modalRef.current && !modalRef.current.contains(e.target)){
-//         handleCloseModal();
-//       }
-//     }
-
-//       if(showModal){
-//         document.addEventListener('mousedown', handleClickOutside);
-//       }
-
-//       return() => {
-//         document.removeEventListener('mousedown', handleClickOutside);
-//       }
-
-//   }, [showModal])
-
-//   let handleOpenModal = () => {
-//     setShowModal(true);
-//   };
-
-//   let handleCloseModal = () => {
-//     setShowModal(false);
-//   };
-
-//   let handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     if (!validation()) {
-//       return;
-//     }
-
-//     setInputData({
-//       username: "",
-//       email: "",
-//       phoneNumber: "",
-//       dob: "",
-//     });
-
-//     setShowModal(false);
-//   };
-
-//   let handleUsername = (e) => {
-//     let val = e.target.value;
-//     setInputData((prev) => ({
-//       ...prev,
-//       username: val,
-//     }));
-//   };
-
-//   let handleEmail = (e) => {
-//     let val = e.target.value;
-//     setInputData((prev) => ({
-//       ...prev,
-//       email: val,
-//     }));
-//   };
-
-//   let handlePhoneNumber = (e) => {
-//     let val = e.target.value;
-//     setInputData((prev) => ({
-//       ...prev,
-//       phoneNumber: val,
-//     }));
-//   };
-
-//   let handleDob = (e) => {
-//     let val = e.target.value;
-//     setInputData((prev) => ({
-//       ...prev,
-//       dob: val,
-//     }));
-//   };
-
-//   return (
-//     <div className="modal">
-//       <div className="modal-content">
-//         <h1>User Details Modal</h1>
-//         <button
-//           onClick={handleOpenModal}
-//           style={{ backgroundColor: "#2196f3f7", color: "white" }}
-//         >
-//           Open Form
-//         </button>
-//         </div>
-
-//         {showModal && (
-//           <div
-//             className="modalBox"
-//             onClick={(e) => {
-//               if (e.target.classList.contains("modalBox")) {
-//                 handleCloseModal();
-//               }
-//             }}
-//           >
-//             <div className="modalForm" ref={modalRef}>
-//               <h1 style={{ marginTop: "15px" }}>Fill Details</h1>
-//               <form onSubmit={handleSubmit}>
-//                 <div>
-//                   <label htmlFor="username">Username:</label>
-//                   <input
-//                     type="text"
-//                     id="username"
-//                     required
-//                     onChange={handleUsername}
-//                     value={inputData.username}
-//                   />
-//                 </div>
-//                 <div>
-//                   <label htmlFor="email">Email Address:</label>
-//                   <input
-//                     type="email"
-//                     id="email"
-//                     required
-//                     onChange={handleEmail}
-//                     value={inputData.email}
-//                   />
-//                 </div>
-//                 <div>
-//                   <label htmlFor="phone">Phone Number:</label>
-//                   <input
-//                     type="tel"
-//                     id="phone"
-//                     required
-//                     onChange={handlePhoneNumber}
-//                     value={inputData.phoneNumber}
-//                   />
-//                 </div>
-//                 <div>
-//                   <label htmlFor="dob">Date of Birth:</label>
-//                   <input
-//                     type="date"
-//                     id="dob"
-//                     required
-//                     onChange={handleDob}
-//                     value={inputData.dob}
-//                   />
-//                 </div>
-
-//                 <button
-//                   type="submit"
-//                   className="submit-button"
-//                   style={{ backgroundColor: "#2196f3f7", color: "white" }}
-//                 >
-//                   Submit
-//                 </button>
-//               </form>
-//             </div>
-//           </div>
-//         )}
-      
-//     </div>
-//   );
-// }
-
-
 import React, { useEffect, useRef, useState } from "react";
 import "./form.css";
 
@@ -242,14 +50,11 @@ export default function Form() {
   }, [showModal]);
 
   const handleOpenModal = () => setShowModal(true);
-  // const handleCloseModal = () => setShowModal(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!validation()) return;
-
-    // alert("Form submitted successfully!");
 
     // Reset form
     setInputData({
@@ -259,6 +64,7 @@ export default function Form() {
       dob: "",
     });
 
+    // Optionally close modal
     // setShowModal(false);
   };
 
@@ -291,15 +97,23 @@ export default function Form() {
   };
 
   return (
-    <div className="modal">
+    <div>
       <h1>User Details Modal</h1>
       <button onClick={handleOpenModal} style={{ backgroundColor: "#2196f3f7", color: "white" }}>
         Open Form
       </button>
 
       {showModal && (
-        <div className="modal-content">
-          <div className="modalForm" ref={modalRef}>
+        <div
+          className="modal"
+          onClick={(e) => {
+            // Close if clicked directly on backdrop
+            if (e.target.classList.contains("modal")) {
+              setShowModal(false);
+            }
+          }}
+        >
+          <div className="modal-content" ref={modalRef}>
             <h1 style={{ marginTop: "15px" }}>Fill Details</h1>
             <form onSubmit={handleSubmit}>
               <div>
@@ -357,4 +171,174 @@ export default function Form() {
     </div>
   );
 }
+
+
+
+// import React, { useEffect, useRef, useState } from "react";
+// import "./form.css";
+
+// export default function Form() {
+//   const [showModal, setShowModal] = useState(false);
+//   const [inputData, setInputData] = useState({
+//     username: "",
+//     email: "",
+//     phoneNumber: "",
+//     dob: "",
+//   });
+
+//   const modalRef = useRef();
+
+//   function validation() {
+//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+//     if (!emailRegex.test(inputData.email)) {
+//       alert("Invalid email. Please check your email address.");
+//       return false;
+//     }
+
+//     if (inputData.phoneNumber.length !== 10 || isNaN(inputData.phoneNumber)) {
+//       alert("Invalid phone number. Please enter a 10-digit phone number.");
+//       return false;
+//     }
+
+//     if (!inputData.dob || new Date(inputData.dob) > new Date()) {
+//       alert("Invalid date of birth. Please enter a valid past date.");
+//       return false;
+//     }
+
+//     return true;
+//   }
+
+//   useEffect(() => {
+//     const handleClickOutside = (e) => {
+//       if (showModal && modalRef.current && !modalRef.current.contains(e.target)) {
+//         setShowModal(false);
+//       }
+//     };
+
+//     if (showModal) {
+//       document.addEventListener("mousedown", handleClickOutside);
+//     }
+
+//     return () => {
+//       document.removeEventListener("mousedown", handleClickOutside);
+//     };
+//   }, [showModal]);
+
+//   const handleOpenModal = () => setShowModal(true);
+  
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     if (!validation()) return;
+
+    
+
+    
+//     setInputData({
+//       username: "",
+//       email: "",
+//       phoneNumber: "",
+//       dob: "",
+//     });
+
+    
+//   };
+
+//   const handleUsername = (e) => {
+//     setInputData((prev) => ({
+//       ...prev,
+//       username: e.target.value,
+//     }));
+//   };
+
+//   const handleEmail = (e) => {
+//     setInputData((prev) => ({
+//       ...prev,
+//       email: e.target.value,
+//     }));
+//   };
+
+//   const handlePhoneNumber = (e) => {
+//     setInputData((prev) => ({
+//       ...prev,
+//       phoneNumber: e.target.value,
+//     }));
+//   };
+
+//   const handleDob = (e) => {
+//     setInputData((prev) => ({
+//       ...prev,
+//       dob: e.target.value,
+//     }));
+//   };
+
+//   return (
+//     <div className="modal">
+//       <h1>User Details Modal</h1>
+//       <button onClick={handleOpenModal} style={{ backgroundColor: "#2196f3f7", color: "white" }}>
+//         Open Form
+//       </button>
+
+//       {showModal && (
+//         <div className="modal-content">
+//           <div className="modalForm" ref={modalRef}>
+//             <h1 style={{ marginTop: "15px" }}>Fill Details</h1>
+//             <form onSubmit={handleSubmit}>
+//               <div>
+//                 <label htmlFor="username">Username:</label>
+//                 <input
+//                   type="text"
+//                   id="username"
+//                   required
+//                   value={inputData.username}
+//                   onChange={handleUsername}
+//                 />
+//               </div>
+//               <div>
+//                 <label htmlFor="email">Email Address:</label>
+//                 <input
+//                   type="email"
+//                   id="email"
+//                   required
+//                   value={inputData.email}
+//                   onChange={handleEmail}
+//                 />
+//               </div>
+//               <div>
+//                 <label htmlFor="phone">Phone Number:</label>
+//                 <input
+//                   type="tel"
+//                   id="phone"
+//                   required
+//                   value={inputData.phoneNumber}
+//                   onChange={handlePhoneNumber}
+//                 />
+//               </div>
+//               <div>
+//                 <label htmlFor="dob">Date of Birth:</label>
+//                 <input
+//                   type="date"
+//                   id="dob"
+//                   required
+//                   value={inputData.dob}
+//                   onChange={handleDob}
+//                 />
+//               </div>
+
+//               <button
+//                 type="submit"
+//                 className="submit-button"
+//                 style={{ backgroundColor: "#2196f3f7", color: "white" }}
+//               >
+//                 Submit
+//               </button>
+//             </form>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
 
