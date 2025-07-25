@@ -1,0 +1,45 @@
+form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalBox {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalForm {
+  background-color: white;
+  height: 465px;
+  width: 500px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+form {
+  width: 400px;
+  row-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  width: 355px;
+  height: 23px;
+}
+
+label{
+    font-weight: 500;
+}
