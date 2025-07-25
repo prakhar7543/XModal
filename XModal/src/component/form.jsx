@@ -67,7 +67,7 @@ export default function Form() {
       dob: "",
     });
 
-    setShowModal(false);
+    // setShowModal(false);
   };
 
   const handleUsername = (e) => {
