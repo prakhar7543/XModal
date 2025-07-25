@@ -66,38 +66,28 @@ export default function Form() {
       phoneNumber: "",
       dob: "",
     });
+
+    setShowModal(false);
   };
 
   const handleUsername = (e) => {
-    setInputData((prev) => ({
-      ...prev,
-      username: e.target.value,
-    }));
+    setInputData((prev) => ({ ...prev, username: e.target.value }));
   };
 
   const handleEmail = (e) => {
-    setInputData((prev) => ({
-      ...prev,
-      email: e.target.value,
-    }));
+    setInputData((prev) => ({ ...prev, email: e.target.value }));
   };
 
   const handlePhoneNumber = (e) => {
-    setInputData((prev) => ({
-      ...prev,
-      phoneNumber: e.target.value,
-    }));
+    setInputData((prev) => ({ ...prev, phoneNumber: e.target.value }));
   };
 
   const handleDob = (e) => {
-    setInputData((prev) => ({
-      ...prev,
-      dob: e.target.value,
-    }));
+    setInputData((prev) => ({ ...prev, dob: e.target.value }));
   };
 
   return (
-    <div className="modal">
+    <div>
       <h1>User Details Modal</h1>
       <button
         onClick={handleOpenModal}
@@ -107,15 +97,12 @@ export default function Form() {
       </button>
 
       {showModal && (
-        <div className="modal-content" ref={modalRef} onClick={(e) => {
-            // Close if clicked directly on backdrop
-            if (e.target.classList.contains("modal-content")) {
-              setShowModal(false);
-            }
-          }}>
-          <div className="modalForm" >
-            <h1 style={{ marginTop: "15px" }}>Fill Details</h1>
+        <div className="modal">
+          <div className="modal-content" ref={modalRef}>
             <form onSubmit={handleSubmit}>
+              <h1 style={{ marginTop: "15px", marginBottom: "15px" }}>
+                Fill Details
+              </h1>
               <div>
                 <label htmlFor="username">Username:</label>
                 <input
