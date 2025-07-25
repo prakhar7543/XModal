@@ -32,24 +32,24 @@ export default function Form() {
     return true;
   }
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   let handleClickOutside = (e) => {
+    let handleClickOutside = (e) => {
 
-  //     if(modalRef.current && !modalRef.current.contains(e.target)){
-  //       handleCloseModal();
-  //     }
-  //   }
+      if(modalRef.current && !modalRef.current.contains(e.target)){
+        handleCloseModal();
+      }
+    }
 
-  //     if(showModal){
-  //       document.addEventListener('mousedown', handleClickOutside);
-  //     }
+      if(showModal){
+        document.addEventListener('mousedown', handleClickOutside);
+      }
 
-  //     return() => {
-  //       document.removeEventListener('mousedown', handleClickOutside);
-  //     }
+      return() => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      }
 
-  // }, [showModal])
+  }, [showModal])
 
   let handleOpenModal = () => {
     setShowModal(true);
@@ -72,6 +72,8 @@ export default function Form() {
       phoneNumber: "",
       dob: "",
     });
+
+    setShowModal(false);
   };
 
   let handleUsername = (e) => {
@@ -153,7 +155,7 @@ export default function Form() {
                 <div>
                   <label htmlFor="phone">Phone Number:</label>
                   <input
-                    type="phone"
+                    type="tel"
                     id="phone"
                     required
                     onChange={handlePhoneNumber}
