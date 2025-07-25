@@ -109,7 +109,7 @@ export default function Form() {
       {showModal && (
         <div className="modal-content" ref={modalRef} onClick={(e) => {
             // Close if clicked directly on backdrop
-            if (e.target.classList.contains("modal")) {
+            if (e.target.classList.contains("modal-content")) {
               setShowModal(false);
             }
           }}>
