@@ -107,7 +107,12 @@ export default function Form() {
       </button>
 
       {showModal && (
-        <div className="modal-content" ref={modalRef}>
+        <div className="modal-content" ref={modalRef} onClick={(e) => {
+            // Close if clicked directly on backdrop
+            if (e.target.classList.contains("modal")) {
+              setShowModal(false);
+            }
+          }}>
           <div className="modalForm" >
             <h1 style={{ marginTop: "15px" }}>Fill Details</h1>
             <form onSubmit={handleSubmit}>
