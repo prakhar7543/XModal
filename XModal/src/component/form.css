@@ -3,7 +3,7 @@ form div {
   flex-direction: column;
 }
 
-.modalBox {
+.modal-content{
   height: 100%;
   width: 100%;
   display: flex;
@@ -14,7 +14,21 @@ form div {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
+
 }
+
+/* .modalBox {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+} */
 
 .modalForm {
   background-color: white;

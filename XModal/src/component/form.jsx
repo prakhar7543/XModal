@@ -194,18 +194,19 @@ import React, { useEffect, useRef, useState } from "react";
 import "./form.css";
 
 export default function Form() {
-  let [showModal, setShowModal] = useState(false);
-  let [inputData, setInputData] = useState({
+  const [showModal, setShowModal] = useState(false);
+  const [inputData, setInputData] = useState({
     username: "",
     email: "",
     phoneNumber: "",
     dob: "",
   });
 
-  let modalRef = useRef();
+  const modalRef = useRef();
 
   function validation() {
-    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!emailRegex.test(inputData.email)) {
       alert("Invalid email. Please check your email address.");
       return false;
@@ -225,9 +226,9 @@ export default function Form() {
   }
 
   useEffect(() => {
-    let handleClickOutside = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
-        handleCloseModal();
+    const handleClickOutside = (e) => {
+      if (showModal && modalRef.current && !modalRef.current.contains(e.target)) {
+        setShowModal(false);
       }
     };
 
@@ -240,21 +241,17 @@ export default function Form() {
     };
   }, [showModal]);
 
-  let handleOpenModal = () => {
-    setShowModal(true);
-  };
+  const handleOpenModal = () => setShowModal(true);
+  // const handleCloseModal = () => setShowModal(false);
 
-  let handleCloseModal = () => {
-    setShowModal(false);
-  };
-
-  let handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!validation()) {
-      return;
-    }
+    if (!validation()) return;
 
+    // alert("Form submitted successfully!");
+
+    // Reset form
     setInputData({
       username: "",
       email: "",
@@ -262,99 +259,98 @@ export default function Form() {
       dob: "",
     });
 
-    setShowModal(false);
+    // setShowModal(false);
   };
 
-  let handleUsername = (e) => {
-    setInputData((prev) => ({ ...prev, username: e.target.value }));
+  const handleUsername = (e) => {
+    setInputData((prev) => ({
+      ...prev,
+      username: e.target.value,
+    }));
   };
 
-  let handleEmail = (e) => {
-    setInputData((prev) => ({ ...prev, email: e.target.value }));
+  const handleEmail = (e) => {
+    setInputData((prev) => ({
+      ...prev,
+      email: e.target.value,
+    }));
   };
 
-  let handlePhoneNumber = (e) => {
-    setInputData((prev) => ({ ...prev, phoneNumber: e.target.value }));
+  const handlePhoneNumber = (e) => {
+    setInputData((prev) => ({
+      ...prev,
+      phoneNumber: e.target.value,
+    }));
   };
 
-  let handleDob = (e) => {
-    setInputData((prev) => ({ ...prev, dob: e.target.value }));
+  const handleDob = (e) => {
+    setInputData((prev) => ({
+      ...prev,
+      dob: e.target.value,
+    }));
   };
 
   return (
     <div className="modal">
-      <div className="modal-content">
-        <h1>User Details Modal</h1>
-        <button
-          onClick={handleOpenModal}
-          style={{ backgroundColor: "#2196f3f7", color: "white" }}
-        >
-          Open Form
-        </button>
-      </div>
+      <h1>User Details Modal</h1>
+      <button onClick={handleOpenModal} style={{ backgroundColor: "#2196f3f7", color: "white" }}>
+        Open Form
+      </button>
 
       {showModal && (
-        <div className="modalBox">
-          <div
-            className="overlay"
-            onClick={(e) => {
-              if (e.target.classList.contains("overlay")) {
-                handleCloseModal();
-              }
-            }}
-          >
-            <div className="modalForm overlay" ref={modalRef}>
-              <h1 style={{ marginTop: "15px" }}>Fill Details</h1>
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <label htmlFor="username">Username:</label>
-                  <input
-                    type="text"
-                    id="username"
-                    required
-                    onChange={handleUsername}
-                    value={inputData.username}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email">Email Address:</label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    onChange={handleEmail}
-                    value={inputData.email}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone">Phone Number:</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    required
-                    onChange={handlePhoneNumber}
-                    value={inputData.phoneNumber}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="dob">Date of Birth:</label>
-                  <input
-                    type="date"
-                    id="dob"
-                    required
-                    onChange={handleDob}
-                    value={inputData.dob}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="submit-button"
-                  style={{ backgroundColor: "#2196f3f7", color: "white" }}
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
+        <div className="modal-content">
+          <div className="modalForm" ref={modalRef}>
+            <h1 style={{ marginTop: "15px" }}>Fill Details</h1>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="username">Username:</label>
+                <input
+                  type="text"
+                  id="username"
+                  required
+                  value={inputData.username}
+                  onChange={handleUsername}
+                />
+              </div>
+              <div>
+                <label htmlFor="email">Email Address:</label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  value={inputData.email}
+                  onChange={handleEmail}
+                />
+              </div>
+              <div>
+                <label htmlFor="phone">Phone Number:</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  required
+                  value={inputData.phoneNumber}
+                  onChange={handlePhoneNumber}
+                />
+              </div>
+              <div>
+                <label htmlFor="dob">Date of Birth:</label>
+                <input
+                  type="date"
+                  id="dob"
+                  required
+                  value={inputData.dob}
+                  onChange={handleDob}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="submit-button"
+                style={{ backgroundColor: "#2196f3f7", color: "white" }}
+              >
+                Submit
+              </button>
+            </form>
           </div>
         </div>
       )}
